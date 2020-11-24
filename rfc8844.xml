@@ -1,19 +1,19 @@
 <?xml version='1.0' encoding='utf-8'?>
 
 <!DOCTYPE rfc SYSTEM "rfc2629-xhtml.ent">
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" 
-ipr="trust200902" 
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude"
+ipr="trust200902"
 number="8844"
-docName="draft-ietf-mmusic-sdp-uks-07" 
-category="std" 
-updates="8122" 
-obsoletes="" 
+docName="draft-ietf-mmusic-sdp-uks-07"
+category="std"
+updates="8122"
+obsoletes=""
 submissionType="IETF"
-consensus="true" 
-xml:lang="en" 
-tocInclude="true" 
-sortRefs="true" 
-symRefs="true" 
+consensus="true"
+xml:lang="en"
+tocInclude="true"
+sortRefs="true"
+symRefs="true"
 version="3">
   <!-- xml2rfc v2v3 conversion 2.29.0 -->
   <front>
@@ -62,7 +62,7 @@ version="3">
       format="default"/> is defined as DTLS-SRTP <xref target="RFC5763"
       format="default"/>.</t>
       <t>In these specifications, key agreement is performed using TLS or DTLS, with
-authentication being linked to the session description (or SDP) through the
+authentication being tied back to the session description (or SDP) through the
 use of certificate fingerprints.  Communication peers check that a hash, or
 fingerprint, provided in the SDP matches the certificate that is used in the TLS
 or DTLS handshake.</t>
@@ -108,7 +108,7 @@ relation to the described attacks.</t>
 claims to control a key that is in reality controlled by some other actor.  This
 arises when the identity associated with a key is not properly bound to the key.</t>
       <t>An endpoint that can acquire the certificate fingerprint of another entity can
-advertise that fingerprint as their own in SDP.  
+advertise that fingerprint as their own in SDP.
    An attacker can use a copy of that fingerprint to cause a victim to
    communicate with another unaware victim, even though the first victim believes
    that it is communicating with the attacker.
@@ -156,12 +156,12 @@ describes an attack on SDP signaling under these constraints.</t>
 <xref target="WEBRTC" format="default"/> or <xref target="RFC8224" format="default"/>, have a different threat model, which admits the
 possibility of attack by an entity with access to the signaling channel.
 Attacks under these conditions are more feasible as an attacker is assumed to be
-able to observe and to modify signaling messages.  <xref target="id" format="default"/> describes an attack
+able both to observe and to modify signaling messages.  <xref target="id" format="default"/> describes an attack
 that assumes this threat model.</t>
       </section>
       <section anchor="continuity" numbered="true" toc="default">
         <name>Interactions with Key Continuity</name>
-        <t>Systems that use key continuity (as defined in 
+        <t>Systems that use key continuity (as defined in
 <xref target="RFC6189" sectionFormat="of" section="15.1" format="default"/>
 or as recommended in <xref target="RFC8122" sectionFormat="of" section="7" format="default"/>) might be able to detect an
 unknown key-share attack if a session with either the attacker or the genuine
@@ -199,7 +199,7 @@ of 3PCC if peers have different views of the involved identities or the value
 of SDP <tt>tls-id</tt> attributes.</t>
         <t>For 3PCC to work with the proposed mechanisms, TLS peers need to be aware of the
 signaling so that they can correctly generate and check the TLS extensions.  For
-a connection to be successfully established, a 3PCC controller needs either to 
+a connection to be successfully established, a 3PCC controller needs either to
 forward SDP without modification or to avoid modifications to <tt>fingerprint</tt>,
 <tt>tls-id</tt>, and <tt>identity</tt> attributes.  A controller that follows the best
 practices in RFC 3725 is expected to forward SDP without modification, thus
@@ -208,7 +208,7 @@ ensuring the integrity of these attributes.</t>
     </section>
     <section anchor="id" numbered="true" toc="default">
       <name>Unknown Key-Share Attack with Identity Bindings</name>
-      <t>The identity assertions used for WebRTC 
+      <t>The identity assertions used for WebRTC
 (<xref target="RFC8827" sectionFormat="of" section="7" format="default"/>) and the
 Personal Assertion Token (PASSporT) used in SIP identity (<xref target="RFC8224" format="default"/>, <xref target="RFC8225" format="default"/>) are bound
 to the certificate fingerprint of an endpoint.  An attacker can cause an identity
@@ -218,7 +218,7 @@ a first victim.</t>
 communicating with an attacker-controlled identity, when they are really talking
 to the first victim.  The attacker does this by creating an identity assertion
 that covers a certificate fingerprint of the first victim.</t>
-      <t>A variation on the same technique can be used to cause both victims to 
+      <t>A variation on the same technique can be used to cause both victims to
 believe they are talking to the attacker when they are talking to each other.
 In this case, the attacker performs the identity misbinding once for each
 victim.</t>
@@ -274,14 +274,14 @@ communicate with Mallory; a second session with Norma is presented to Patsy.</t>
         </figure>
         <t>The attack requires that Mallory obtain an identity binding for her own identity
 with the fingerprints presented by Patsy (P), which Mallory might have obtained
-previously.  This false binding is then presented to Norma ('Signaling1' in 
+previously.  This false binding is then presented to Norma ('Signaling1' in
 <xref target="identity-attack" format="default"/>).</t>
         <t>Patsy could be similarly duped, but in this example, a correct binding between
 Norma's identity and fingerprint (N) is faithfully presented by Mallory.  This
 session ('Signaling2' in <xref target="identity-attack" format="default"/>) can be entirely legitimate.</t>
-       <t>A DTLS session is established directly between Norma and Patsy.  
+       <t>A DTLS session is established directly between Norma and Patsy.
    In order for this to happen, Mallory can substitute transport-level
-   information in both sessions, though this is not necessary if Mallory 
+   information in both sessions, though this is not necessary if Mallory
    is on the network path between Norma and Patsy.
 </t>
         <t>As a result, Patsy correctly believes that she is communicating with Norma.
@@ -332,7 +332,7 @@ a TLS connection rather than fail a connection where the extension is absent.</t
 below.  Two of the tasks sound like they would be performed by a receiver
 of the information (validating the external_hash_id, [FINGERPRINT]
 validation), while "identity assertion definition" sounds like something
-the sender would do. Should "definition" be "verification"? 
+the sender would do. Should "definition" be "verification"?
 
 Original:
    Any validation performed of the "external_id_hash" extension is done
@@ -340,27 +340,27 @@ Original:
    identity assertion definition.
 
 Perhaps:
-   The endpoint performs the validation of the external_id_hash extension 
-   in addition to the validation required by [RFC8122] and any verification 
+   The endpoint performs the validation of the external_id_hash extension
+   in addition to the validation required by [RFC8122] and any verification
    of the identity assertion.
 -->
         <t>
-   The endpoint performs the validation of the <tt>external_id_hash</tt> extension 
-   in addition to the validation required by <xref target="RFC8122" format="default"/> and any verification 
+   The endpoint performs the validation of the <tt>external_id_hash</tt> extension
+   in addition to the validation required by <xref target="RFC8122" format="default"/> and any verification
    of the identity assertion <xref target="RFC8827" format="default"/> <xref target="RFC8224" format="default"/>.
 </t>
 
-        <t>An <tt>external_id_hash</tt> extension with a <tt>binding_hash</tt> field 
+        <t>An <tt>external_id_hash</tt> extension with a <tt>binding_hash</tt> field
 that is any length other than 0 or 32 is invalid
 and <bcp14>MUST</bcp14> cause the receiving endpoint to generate a fatal <tt>decode_error</tt> alert.</t>
         <t>In TLS 1.3, an <tt>external_id_hash</tt> extension sent by a server <bcp14>MUST</bcp14> be sent in the
 EncryptedExtensions message.</t>
         <section anchor="calculating-externalidhash-for-webrtc-identity" numbered="true" toc="default">
           <name>Calculating <tt>external_id_hash</tt> for WebRTC Identity</name>
-          <t>A WebRTC identity assertion 
+          <t>A WebRTC identity assertion
 (<xref target="RFC8827" sectionFormat="of" section="7" format="default"/>) is provided as a JSON
 <xref target="RFC8259" format="default"/> object that is encoded into a JSON text.  The JSON text is
-encoded using UTF-8 <xref target="RFC3629" format="default"/> as described by 
+encoded using UTF-8 <xref target="RFC3629" format="default"/> as described by
 <xref target="RFC8259" sectionFormat="of" section="8.1" format="default"/>.
 The content of the <tt>external_id_hash</tt> extension is produced by hashing the
 resulting octets with SHA-&wj;256 <xref target="RFC6234" format="default"/>.  This produces the 32 octets of
@@ -386,7 +386,7 @@ canonicalized; all octets are hashed.</dd>
         </section>
         <section anchor="calculating-externalidhash-for-passport" numbered="true" toc="default">
           <name>Calculating external_id_hash for PASSporT</name>
-          <t>Where the compact form of PASSporT <xref target="RFC8225" format="default"/> 
+          <t>Where the compact form of PASSporT <xref target="RFC8225" format="default"/>
 is used, it <bcp14>MUST</bcp14> be expanded
 into the full form.  The base64 encoding used in the SIP Identity (or 'y')
 header field <bcp14>MUST</bcp14> be decoded then used as input to SHA-&wj;256.  This produces the
@@ -496,7 +496,7 @@ However, this attack is only possible if the victim (Norma) is willing to
 conduct two sessions nearly simultaneously; if the attacker (Mallory) is on the
 network path between the victims; and if the same certificate -- and therefore
 the SDP <tt>fingerprint</tt> attribute value -- is used by Norma for both sessions.</t>
-        <t>Where Interactive Connectivity Establishment (ICE) <xref target="RFC8445" format="default"/> 
+        <t>Where Interactive Connectivity Establishment (ICE) <xref target="RFC8445" format="default"/>
 is used, Mallory also needs to ensure that
 connectivity checks between Patsy and Norma succeed, either by forwarding checks
 or by answering and generating the necessary messages.</t>
@@ -547,8 +547,8 @@ considered benign since these protocols are designed to be distinguishable as
 SRTP <xref target="RFC3711" format="default"/> provides key separation.  Using RTP/RTCP multiplexing
 <xref target="RFC5761" format="default"/> further avoids this problem.</t>
         <t>The <tt>external_session_id</tt> extension is included in a ClientHello, and if the
-extension is present in the ClientHello, either ServerHello (for TLS and DTLS
-versions older than 1.3) or EncryptedExtensions (for TLS 1.3).</t>
+extension is present in the ClientHello, and either the ServerHello (for TLS and DTLS
+versions older than 1.3) or the EncryptedExtensions (for TLS 1.3).</t>
         <t>Endpoints <bcp14>MUST</bcp14> check that the <tt>session_id</tt> parameter in the extension that they
 receive includes the <tt>tls-id</tt> attribute value that they received in their peer's
 session description.  Endpoints can perform string comparison by ASCII decoding
@@ -586,7 +586,7 @@ the attacker when they are talking to each other.</t>
 identifiers does not prevent session concatenation if the attacker is able to
 copy the session identifier from one signaling session to another.  This kind of
 attack is prevented by systems that enable peer authentication, such as WebRTC
-identity <xref target="RFC8827" format="default"/> 
+identity <xref target="RFC8827" format="default"/>
 or SIP identity <xref target="RFC8224" format="default"/>.  However, session
 concatenation remains possible at higher layers: an attacker can establish two
 independent sessions and simply forward any data it receives from one into the
@@ -627,7 +627,7 @@ concatenation (<xref target="concat" format="default"/>) additionally requires t
 claim the certificate fingerprints of other entities.</t>
     </section>
 
-    <section anchor="iana-considerations" numbered="true" toc="default"> 
+    <section anchor="iana-considerations" numbered="true" toc="default">
       <name>IANA Considerations</name>
       <t>This document registers two extensions in the "TLS ExtensionType Values"
 registry established in <xref target="RFC8446" format="default"/>:</t>
@@ -718,7 +718,7 @@ Datagram Transport Layer Security (DTLS) and Transport Layer Security
 
 </reference>
 
-     </references> 
+     </references>
 
      <references>
         <name>Informative References</name>
